@@ -29,12 +29,17 @@ rag_juridico/
 │
 ├── app.py                 # Interface com Streamlit
 ├── rag_pipeline.py        # Pipeline de ingestão, embedding, indexação e resposta
+├── utils.py               # Funções auxiliares (carregamento, token count, etc.)
+├── .gitignore             # Ignora venv, .env, __pycache__, etc
 ├── requirements.txt       # Bibliotecas necessárias
 ├── README.md              # Este arquivo
 │
+├── .streamlit/
+│   └── secrets.toml       # Para deploy seguro
+│
 └── data/
     ├── documentos/        # PDFs ou documentos de entrada
-    └── index/             # Arquivos do banco vetorial (FAISS)
+    └── indexes/           # FAISS index gerado para os documento
 ```
 
 ---
