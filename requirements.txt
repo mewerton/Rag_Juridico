@@ -1,0 +1,7 @@
+streamlit
+langchain
+langchain-groq
+sentence-transformers
+faiss-cpu
+tqdm
+docling

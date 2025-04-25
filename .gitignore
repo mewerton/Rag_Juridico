@@ -1,0 +1,20 @@
+# Ambiente virtual
+venv/
+
+# Arquivos do Streamlit
+.streamlit/secrets.toml
+
+# Arquivos gerados pelo Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Configurações de sistema
+.DS_Store
+Thumbs.db
+
+# Dados do projeto
+data/indexes/
+
+# Outros
+*.log
