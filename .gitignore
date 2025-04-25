@@ -1,6 +1,9 @@
 # Ambiente virtual
 venv/
 
+#base de Dados
+
+
 # Arquivos do Streamlit
 .streamlit/secrets.toml
 
