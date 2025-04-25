@@ -1,9 +1,6 @@
 # Ambiente virtual
 venv/
 
-#base de Dados
-
-
 # Arquivos do Streamlit
 .streamlit/secrets.toml
 
@@ -17,7 +14,7 @@ __pycache__/
 Thumbs.db
 
 # Dados do projeto
-data/indexes/
+data/
 
 # Outros
 *.log
