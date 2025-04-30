@@ -35,11 +35,16 @@ rag_juridico/
 ├── README.md              # Este arquivo
 │
 ├── .streamlit/
-│   └── secrets.toml       # Para deploy seguro
+│   ├── secrets.toml       # Para deploy seguro
+│   └── config.toml 
 │
 └── data/
-    ├── documentos/        # PDFs ou documentos de entrada
-    └── indexes/           # FAISS index gerado para os documento
+│   ├── documentos/        # PDFs ou documentos de entrada 
+│   └── indexes/           # FAISS index gerado para os documento
+│
+└── tests/ 
+│   ├── test_pipeline.py       
+│   └── test_utils.py 
 ```
 
 ---
