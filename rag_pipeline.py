@@ -18,7 +18,7 @@ from langchain_docling.loader import ExportType
 DATA_FOLDER = "data"
 DOCUMENTS_FOLDER = os.path.join(DATA_FOLDER, "documentos")
 INDEX_FOLDER = os.path.join(DATA_FOLDER, "indexes")
-EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
+EMBEDDING_MODEL_NAME = "intfloat/multilingual-e5-large"
 LLM_MODEL_NAME = "llama3-8b-8192"
 
 # Função: carregar documento com DoclingLoader (oficial)
@@ -31,10 +31,17 @@ def load_documents_with_docling(file_path: str, export_type=ExportType.DOC_CHUNK
     documents = loader.load()
     return documents
 
+# ✅ Novo: adiciona prefixo "passage:" ao conteúdo dos documentos
+def prefix_documents_for_e5(documents: List[LCDocument]) -> List[LCDocument]:
+    """Adiciona prefixo 'passage:' no conteúdo dos documentos (necessário para E5 embeddings)."""
+    for doc in documents:
+        doc.page_content = f"passage: {doc.page_content.strip()}"
+    return documents
+
 # Função: opcional — re-chunk se necessário
 def split_text_into_chunks(documents: List[LCDocument]) -> List[LCDocument]:
     """Divide documentos em chunks menores para melhor performance do embedding."""
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=2500, chunk_overlap=400)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     return text_splitter.split_documents(documents)
 
 # Função: criar ou carregar vetorstore FAISS
@@ -43,7 +50,6 @@ def create_or_load_vectorstore(file_path: str, documents: List[LCDocument], embe
     base_filename = os.path.splitext(os.path.basename(file_path))[0]
     index_path = os.path.join(INDEX_FOLDER, f"{base_filename}_faiss_index")
 
-    # Garante que o diretório indexes existe
     os.makedirs(INDEX_FOLDER, exist_ok=True)
 
     if os.path.exists(index_path):
@@ -60,7 +66,7 @@ def create_or_load_vectorstore(file_path: str, documents: List[LCDocument], embe
 # Função: criar RAG Chain com LangChain
 def create_rag_chain(vectorstore: FAISS) -> object:
     """Cria a RAG chain conectando vetorstore e LLM (Groq + Llama3)."""
-    retriever = vectorstore.as_retriever(search_type="mmr", search_kwargs={"k": 5})
+    retriever = vectorstore.as_retriever(search_type="mmr", search_kwargs={"k": 10})
 
     llm = ChatGroq(
         temperature=0.1,
@@ -76,6 +82,10 @@ def create_rag_chain(vectorstore: FAISS) -> object:
     <context>
     {context}
     </context>
+
+    Pergunta: {input}
+
+    Resposta:
     """
     prompt = ChatPromptTemplate.from_template(template)
 
@@ -88,8 +98,7 @@ def create_rag_chain(vectorstore: FAISS) -> object:
 def process_document(file_path: str) -> object:
     """Pipeline completo: lê o documento, cria vetorstore e prepara a RAG chain."""
     documents = load_documents_with_docling(file_path)
-    # Se quiser forçar novo chunk, use a linha abaixo:
-    # documents = split_text_into_chunks(documents)
+    documents = prefix_documents_for_e5(documents)  # 🔧 Adiciona o prefixo necessário para o modelo E5
     embeddings = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL_NAME)
     vectorstore = create_or_load_vectorstore(file_path, documents, embeddings)
     rag_chain = create_rag_chain(vectorstore)
