@@ -31,7 +31,7 @@ def load_documents_with_docling(file_path: str, export_type=ExportType.DOC_CHUNK
     documents = loader.load()
     return documents
 
-# ✅ Novo: adiciona prefixo "passage:" ao conteúdo dos documentos
+# adiciona prefixo "passage:" ao conteúdo dos documentos
 def prefix_documents_for_e5(documents: List[LCDocument]) -> List[LCDocument]:
     """Adiciona prefixo 'passage:' no conteúdo dos documentos (necessário para E5 embeddings)."""
     for doc in documents:
