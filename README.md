@@ -32,6 +32,8 @@ rag_juridico/
 ├── utils.py               # Funções auxiliares (carregamento, token count, etc.)
 ├── .gitignore             # Ignora venv, .env, __pycache__, etc
 ├── requirements.txt       # Bibliotecas necessárias
+├── pytest.ini              
+├── LICENSE              
 ├── README.md              # Este arquivo
 │
 ├── .streamlit/
