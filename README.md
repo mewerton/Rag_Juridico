@@ -118,6 +118,28 @@ Os testes criam arquivos temporários como índices FAISS. Esses arquivos são *
 
 ---
 
+## 📌 Considerações Técnicas
+
+Este projeto implementa um sistema de **RAG tradicional**, com fluxo linear de ingestão, indexação vetorial e recuperação via FAISS, complementado por um LLM (Groq + LLaMA3) para geração de respostas baseadas em documentos jurídicos.
+
+A arquitetura atual é adequada para:
+- 🟢 **Ambientes de produção leve**
+- 🧪 **Demonstrações institucionais**
+- 📄 **Casos de uso com análise direta de documentos em PDF**
+
+### 🧠 Possível Evolução: RAG com LangGraph
+
+Para cenários mais dinâmicos, como:
+- Fluxos de análise em múltiplas etapas (ex: sumarização + verificação + resposta)
+- Retenção de estado conversacional
+- Processamento condicional com agentes LLM
+
+... é recomendada a adoção do **LangGraph**, que permite orquestração avançada, controle de fluxo personalizado e maior escalabilidade em interações complexas.
+
+Essa distinção reforça a **intenção arquitetural do projeto**: começar simples, mas com base sólida para futura evolução.
+
+---
+
 ## 👨‍💼 Desenvolvido por
 
 **Mewerton de Melo Silva**  
