@@ -52,13 +52,13 @@ rag_juridico/
 │   ├── secrets.toml       # Para deploy seguro
 │   └── config.toml
 │
-└── data/
-    ├── documentos/        # PDFs ou documentos de entrada
-    └── indexes/           # FAISS index gerado para os documentos
+├── data/
+│    ├── documentos/        # PDFs ou documentos de entrada
+│    └── indexes/           # FAISS index gerado para os documentos
 │
-└── tests/
-    ├── test_pipeline.py   # Testes do pipeline principal
-    └── test_utils.py      # Testes das funções auxiliares
+├── tests/
+│   ├── test_pipeline.py   # Testes do pipeline principal
+│   └── test_utils.py      # Testes das funções auxiliares
 ```
 
 ---
