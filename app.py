@@ -6,8 +6,9 @@ import streamlit as st
 from rag_pipeline import process_document
 
 # Título do projeto
-st.set_page_config(page_title="RAG Jurídico", layout="centered")
-st.title("📚 RAG Jurídico - Análise Inteligente de Documentos Jurídicos")
+st.set_page_config(page_title="RAG Jurídico", layout="wide")
+st.title("📚 RAG Jurídico")
+st.title("Análise de Documentos Jurídicos")
 
 # Inicializar o session_state para guardar o RAG chain
 if "rag_chain" not in st.session_state:
