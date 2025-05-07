@@ -4,6 +4,8 @@ import time
 import hashlib
 from langchain_core.documents import Document as LCDocument
 from transformers import AutoTokenizer
+from typing import Union
+from pathlib import Path
 
 
 def count_tokens(text: str, model_name: str = "intfloat/multilingual-e5-large") -> int:
@@ -11,7 +13,6 @@ def count_tokens(text: str, model_name: str = "intfloat/multilingual-e5-large") 
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     return len(tokenizer.encode(text))
 
-# adiciona prefixo "passage:" ao conteúdo dos documentos
 def prefix_documents_for_e5(documents: List[LCDocument]) -> List[LCDocument]:
     """Adiciona prefixo 'passage:' no conteúdo dos documentos (necessário para E5 embeddings)."""
     for doc in documents:
@@ -42,9 +43,8 @@ def extract_metadata(document: LCDocument) -> str:
     return f"[Origem: {meta.get('source', 'Desconhecida')}]"
 
 
-def ensure_directory(path: str) -> None:
-    """Cria o diretório se ele não existir."""
-    os.makedirs(path, exist_ok=True)
+def ensure_directory(path: Union[str, Path]) -> None:
+    Path(path).mkdir(parents=True, exist_ok=True)
 
 
 def format_response(text: str) -> str:
