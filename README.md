@@ -11,6 +11,11 @@ Demonstrar como a técnica de RAG pode ser aplicada no setor jurídico para faci
 
 ---
 
+## Vídeo exibindo o projeto em funcionamento
+- https://www.linkedin.com/feed/update/urn:li:activity:7326319147112402945/
+
+---
+
 ## 🖼️ Exemplo do Sistema
 
 Veja abaixo uma prévia do layout da aplicação em execução:
