@@ -1,30 +1,30 @@
 
-# 🧠 Rag Jurídico
+# 🧠 Legal RAG System
 
-Projeto de RAG (Retrieval-Augmented Generation) voltado para análise de documentos jurídicos com uso de modelos de linguagem (LLMs). Permite carregar arquivos jurídicos (como PDFs) ou coletar dados de APIs públicas, gerar embeddings, indexar os dados com FAISS e realizar perguntas em linguagem natural com respostas baseadas no conteúdo.
-
----
-
-## 🚀 Objetivo
-
-Demonstrar como a técnica de RAG pode ser aplicada no setor jurídico para facilitar a análise e extração de informações de documentos legais, como contratos, petições, decisões judiciais e pareceres.
+A Retrieval-Augmented Generation (RAG) system designed for legal document analysis using Large Language Models (LLMs). The system allows users to upload legal documents (PDFs), generate embeddings, index data with FAISS, and ask questions in natural language with answers grounded in the source content.
 
 ---
 
-## Vídeo exibindo o projeto em funcionamento
+## 🚀 Objective
+
+Demonstrate how RAG can be applied in the legal domain to improve the extraction and analysis of information from legal documents such as contracts, petitions, court decisions, and legal opinions.
+
+---
+
+## Demo
 - https://www.linkedin.com/feed/update/urn:li:activity:7326319147112402945/
 
 ---
 
-## 🖼️ Exemplo do Sistema
+## 🖼️ System Preview
 
-Veja abaixo uma prévia do layout da aplicação em execução:
+Below is a preview of the application layout in execution:
 
 ![Layout do sistema](assets/layout_sistema.png)
 
 ---
 
-## 🔧 Tecnologias Utilizadas
+## 🔧 Technologies Used
 
 - Python 3.10+
 - Streamlit
@@ -37,122 +37,120 @@ Veja abaixo uma prévia do layout da aplicação em execução:
 
 ---
 
-## 📁 Estrutura do Projeto
+## 📁 Project Structure
 
 ```
 rag_juridico/
 │
-├── app.py                 # Interface com Streamlit
-├── rag_pipeline.py        # Pipeline de ingestão, embedding, indexação e resposta
-├── utils.py               # Funções auxiliares (carregamento, token count, etc.)
-├── requirements.txt       # Bibliotecas necessárias
-├── pytest.ini             # Configurações de teste
-├── LICENSE                # Licença do projeto
-├── README.md              # Este arquivo
+├── app.py                 # Streamlit interface
+├── rag_pipeline.py        # Ingestion, embedding, indexing, and QA pipeline
+├── utils.py               # Helper functions (loading, token counting, etc.)
+├── requirements.txt       # Project dependencies
+├── pytest.ini             # Test configuration
+├── LICENSE                # Project license
+├── README.md              # Documentation
 │
 ├── assets/
 │   └── layout_sistema.png
 │
 ├── .streamlit/
-│   ├── secrets.toml       # Para deploy seguro
+│   ├── secrets.toml       # Secure deployment config
 │   └── config.toml
 │
 ├── data/
-│    ├── documentos/        # PDFs ou documentos de entrada
-│    └── indexes/           # FAISS index gerado para os documentos
+│   ├── documentos/        # Input PDF documents
+│   └── indexes/           # Generated FAISS indexes
 │
 ├── tests/
-│   ├── test_pipeline.py   # Testes do pipeline principal
-│   └── test_utils.py      # Testes das funções auxiliares
+│   ├── test_pipeline.py   # Pipeline unit tests
+│   └── test_utils.py      # Utility function tests
 ```
 
 ---
 
-## ▶️ Como Executar
+## ▶️ How to Run
 
-1. Crie e ative um ambiente virtual:
+1. Create and activate a virtual environment:
 ```bash
 python -m venv venv
 source venv/bin/activate  # ou venv\Scripts\activate no Windows
 ```
 
-2. Instale as dependências:
+2. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Execute o app:
+3. Run the application:
 ```bash
 streamlit run app.py
 ```
 
 ---
 
-## 🧪 Testes Automatizados
+## 🧪 Automated Tests
 
-Este projeto utiliza **pytest** para testes unitários automatizados. Os testes estão localizados na pasta `tests/` e cobrem:
+This project uses pytest for unit testing. Tests are located in the tests/ folder and cover:
 
-- Funções auxiliares (`utils.py`)
-- Pipeline de ingestão e RAG (`rag_pipeline.py`)
+- Utility functions (`utils.py`)
+- RAG pipeline components (`rag_pipeline.py`)
 
-### ✔️ Executar os testes
-
-Com o ambiente virtual ativado, execute:
+### ✔️ Run tests
 
 ```bash
 pytest tests/
 ```
 
-### 🧹 Limpeza automática
+### 🧹 Cleanup
 
-Os testes criam arquivos temporários como índices FAISS. Esses arquivos são **automaticamente removidos** após os testes.
+Temporary files such as FAISS indexes generated during testing are automatically removed after execution.
 
 ---
 
 ## 🛠️ Funcionalidades
 
-- [x] Upload de documentos jurídicos
-- [x] Extração e chunking do texto
-- [x] Geração de embeddings
-- [x] Indexação com FAISS
-- [x] Consulta via LLM com base nos documentos
-- [x] Testes automatizados com `pytest`
-- [ ] Coleta de dados de APIs públicas
-- [ ] Histórico de consultas
-- [ ] Geração de relatórios automáticos
+- [x] Upload legal documents (PDFs)
+- [x] Text extraction and chunking
+- [x] Embedding generation
+- [x] FAISS vector indexing
+- [x] LLM-based question answering grounded in documents
+- [x] Automated tests with pytest
+- [ ] API data ingestion
+- [ ] Query history tracking
+- [ ] Automated report generation
 
 ---
 
-## 📌 Considerações Técnicas
+## 📌 Technical Notes
 
-Este projeto implementa um sistema de **RAG tradicional**, com fluxo linear de ingestão, indexação vetorial e recuperação via FAISS, complementado por um LLM (Groq + LLaMA3) para geração de respostas baseadas em documentos jurídicos.
+This project implements a traditional RAG architecture, following a linear pipeline for ingestion, vector indexing, and retrieval using FAISS, combined with an LLM (Groq + LLaMA 3) to generate context-aware responses based on legal documents.
 
-A arquitetura atual é adequada para:
-- 🟢 **Ambientes de produção leve**
-- 🧪 **Demonstrações institucionais**
-- 📄 **Casos de uso com análise direta de documentos em PDF**
+The current architecture is suitable for:
+- 🟢 **Lightweight production environments**
+- 🧪 **Institutional demonstrations**
+- 📄 **Direct PDF document analysis use cases**
 
-### 🧠 Possível Evolução: RAG com LangGraph
+### 🧠 Future Evolution: LangGraph-based RAG
 
-Para cenários mais dinâmicos, como:
-- Fluxos de análise em múltiplas etapas (ex: sumarização + verificação + resposta)
-- Retenção de estado conversacional
-- Processamento condicional com agentes LLM
+For more advanced scenarios such as:
+- Multi-step reasoning workflows (e.g., summarization + verification + response)
+- Stateful conversational memory
+- Conditional LLM workflows and agents
 
-... é recomendada a adoção do **LangGraph**, que permite orquestração avançada, controle de fluxo personalizado e maior escalabilidade em interações complexas.
+The system can be evolved into a LangGraph-based architecture, enabling more flexible orchestration, structured reasoning flows, and improved scalability for complex interactions.
 
-Essa distinção reforça a **intenção arquitetural do projeto**: começar simples, mas com base sólida para futura evolução.
+This distinction highlights the architectural intent: a simple but solid RAG foundation designed for future expansion.
 
 ---
 
-## 👨‍💼 Desenvolvido por
+## 👨‍💼 Author
 
 **Mewerton de Melo Silva**  
-Ciência de Dados | Inteligência Artificial  
-Contato: [LinkedIn](https://www.linkedin.com/in/mewerton/)
+Data Science | Artificial Intelligence
+[LinkedIn](https://www.linkedin.com/in/mewerton/)
 
 ---
 
-## 📄 Licença
+## 📄 License
 
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+This project is licensed under the MIT License. See the `LICENSE` file for details.
